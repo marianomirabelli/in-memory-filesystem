@@ -11,7 +11,6 @@ public class CdCommand implements Command{
 
     private String argument;
     private final static String UP_DIRECTORY = "..";
-    //private final static String MULTI_FACETED_PARAMETER = "-mf";
     public CdCommand(String argument){
         this.argument = argument;
     }

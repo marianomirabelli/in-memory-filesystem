@@ -47,7 +47,6 @@ public class LsCommandTest {
         LsCommand lsCommand = new LsCommand("");
         String response = lsCommand.execute(fileSystem);
         String expectedResult = buildNotRecursiveValue();
-        System.out.println(expectedResult);
         Assertions.assertEquals(expectedResult,response);
     }
 
