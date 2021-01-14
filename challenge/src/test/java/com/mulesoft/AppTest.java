@@ -9,16 +9,14 @@ import java.util.List;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-{
+public class AppTest {
     /**
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
-    {
+    public void shouldAnswerWithTrue() {
         List<String> foo = new ArrayList<>();
         foo.add("1");
-        Assertions.assertEquals( "1", foo.stream().findFirst().get());
+        Assertions.assertEquals("1", foo.stream().findFirst().get());
     }
 }
