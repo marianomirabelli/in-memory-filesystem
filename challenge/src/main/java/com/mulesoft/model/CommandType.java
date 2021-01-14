@@ -2,7 +2,8 @@ package com.mulesoft.model;
 
 public enum CommandType {
     MKDIR,
-    DIR,
-    UP,
+    LS,
+    PWD,
+    TOUCH,
     CD;
 }

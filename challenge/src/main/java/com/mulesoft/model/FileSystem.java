@@ -10,8 +10,8 @@ public class FileSystem {
         this.currentPosition = root;
     }
 
-    public void downLevel(String name){
-        this.currentPosition = this.currentPosition.getSubdirectories().get(name);
+    public void downLevel(Directory directory){
+        this.currentPosition = directory;
     }
 
     public void upLevel(){

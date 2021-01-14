@@ -1,0 +1,111 @@
+package com.mulesoft.controller;
+
+import com.mulesoft.commad.CdCommand;
+import com.mulesoft.commad.MkdirCommand;
+import com.mulesoft.factory.CommandFactory;
+import com.mulesoft.model.FileSystem;
+import com.mulesoft.utils.Validator;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class FileSystemControllerTest {
+
+    public FileSystem fileSystem;
+    private FileSystemController controller;
+
+    @BeforeEach
+    public void init(){
+        fileSystem = new FileSystem();
+        MkdirCommand mkdirCommand = new MkdirCommand("foo1",Validator.getInstance());
+        mkdirCommand.execute(fileSystem);
+        MkdirCommand mkdirCommand2 = new MkdirCommand("foo2",Validator.getInstance());
+        mkdirCommand2.execute(fileSystem);
+        MkdirCommand mkdirCommand3 = new MkdirCommand("foo3",Validator.getInstance());
+        mkdirCommand3.execute(fileSystem);
+        CdCommand cdCommand1 = new CdCommand("foo1");
+        cdCommand1.execute(fileSystem);
+        MkdirCommand mkdirCommandFoo2 = new MkdirCommand("foo2",Validator.getInstance());
+        mkdirCommandFoo2.execute(fileSystem);
+        MkdirCommand mkdirCommandFoo3 = new MkdirCommand("foo3",Validator.getInstance());
+        mkdirCommandFoo3.execute(fileSystem);
+        CdCommand upLevel = new CdCommand("..");
+        upLevel.execute(fileSystem);
+        this.controller = new FileSystemController(fileSystem,new CommandFactory(),Validator.getInstance());
+    }
+
+    @Test
+    public void executeUnexistentCommand(){
+        String commandLine = "foo -r";
+        String expectedOutput = "Unrecognized command";
+        String response = this.controller.doExecute(commandLine);
+        Assertions.assertEquals(expectedOutput,response);
+    }
+
+    @Test
+    public void executePwdAction(){
+        String commandLine = "pwd";
+        String response = this.controller.doExecute(commandLine);
+        Assertions.assertEquals("/root",response);
+    }
+
+    @Test
+    public void executeCdWithoutValidDirectory(){
+        String commandLine = "cd foo8";
+        String response = this.controller.doExecute(commandLine);
+        String expectedAnswer = "Directory not found";
+        this.controller.doExecute("touch file1");
+        String cdIntoFileResponse = this.controller.doExecute("cd foo8");
+        Assertions.assertEquals(expectedAnswer,cdIntoFileResponse);
+        Assertions.assertEquals(expectedAnswer,response);
+    }
+
+    @Test
+    public void executeCdWithValidDirectory(){
+        String commandLine = "cd foo2";
+        String response = this.controller.doExecute(commandLine);
+        String expectedAnswer = "";
+        Assertions.assertEquals(expectedAnswer,response);
+        String output = this.controller.doExecute("ls");
+        Assertions.assertEquals("",output);
+        this.controller.doExecute("cd ..");
+    }
+
+    @Test
+    public void executeMkdir(){
+        String commandLine = "mkdir foo4";
+        String response = this.controller.doExecute(commandLine);
+        String expectedAnswer = "";
+        Assertions.assertEquals(expectedAnswer,response);
+        String parentLevel = this.controller.doExecute("ls");
+        StringBuilder expectedAnswerBuilder = new StringBuilder();
+        expectedAnswerBuilder.append("foo1");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo2");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo3");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo4");
+        Assertions.assertEquals(expectedAnswerBuilder.toString(),parentLevel);
+    }
+
+    @Test
+    public void executeTouch(){
+        String commandLine = "touch file1";
+        String response = this.controller.doExecute(commandLine);
+        String expectedAnswer = "";
+        Assertions.assertEquals(expectedAnswer,response);
+        String parentLevel = this.controller.doExecute("ls");
+        StringBuilder expectedAnswerBuilder = new StringBuilder();
+        expectedAnswerBuilder.append("file1");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo1");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo2");
+        expectedAnswerBuilder.append("\n");
+        expectedAnswerBuilder.append("foo3");
+        Assertions.assertEquals(expectedAnswerBuilder.toString(),parentLevel);
+    }
+
+
+}
