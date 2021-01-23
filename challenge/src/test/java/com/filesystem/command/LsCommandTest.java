@@ -1,10 +1,10 @@
-package com.mulesoft.command;
+package com.filesystem.command;
 
-import com.mulesoft.commad.CdCommand;
-import com.mulesoft.commad.LsCommand;
-import com.mulesoft.commad.MkdirCommand;
-import com.mulesoft.model.FileSystem;
-import com.mulesoft.utils.Validator;
+import com.filesystem.commad.CdCommand;
+import com.filesystem.commad.LsCommand;
+import com.filesystem.commad.MkdirCommand;
+import com.filesystem.model.FileSystem;
+import com.filesystem.utils.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

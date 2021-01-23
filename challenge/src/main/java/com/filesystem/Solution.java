@@ -1,6 +1,6 @@
-package com.mulesoft;
+package com.filesystem;
 
-import com.mulesoft.application.App;
+import com.filesystem.application.App;
 
 import java.io.IOException;
 

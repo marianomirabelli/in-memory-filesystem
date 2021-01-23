@@ -1,9 +1,9 @@
-package com.mulesoft.application;
+package com.filesystem.application;
 
-import com.mulesoft.controller.FileSystemController;
-import com.mulesoft.factory.CommandFactory;
-import com.mulesoft.model.FileSystem;
-import com.mulesoft.utils.Validator;
+import com.filesystem.controller.FileSystemController;
+import com.filesystem.factory.CommandFactory;
+import com.filesystem.model.FileSystem;
+import com.filesystem.utils.Validator;
 
 import java.util.Scanner;
 

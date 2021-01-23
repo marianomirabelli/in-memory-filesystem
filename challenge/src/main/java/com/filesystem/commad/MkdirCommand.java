@@ -1,9 +1,9 @@
-package com.mulesoft.commad;
+package com.filesystem.commad;
 
-import com.mulesoft.model.Directory;
-import com.mulesoft.model.FileSystem;
-import com.mulesoft.model.FileSystemEntity;
-import com.mulesoft.utils.Validator;
+import com.filesystem.model.Directory;
+import com.filesystem.model.FileSystem;
+import com.filesystem.model.FileSystemEntity;
+import com.filesystem.utils.Validator;
 
 import java.util.Map;
 import java.util.Objects;

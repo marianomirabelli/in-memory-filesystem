@@ -1,7 +1,7 @@
-package com.mulesoft.commad;
+package com.filesystem.commad;
 
-import com.mulesoft.model.*;
-import com.mulesoft.utils.Validator;
+import com.filesystem.model.*;
+import com.filesystem.utils.Validator;
 
 import java.util.Map;
 import java.util.Objects;

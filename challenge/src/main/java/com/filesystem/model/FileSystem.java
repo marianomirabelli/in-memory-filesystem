@@ -1,4 +1,4 @@
-package com.mulesoft.model;
+package com.filesystem.model;
 
 public class FileSystem {
 

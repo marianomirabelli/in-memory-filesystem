@@ -1,6 +1,6 @@
-package com.mulesoft.commad;
+package com.filesystem.commad;
 
-import com.mulesoft.model.FileSystem;
+import com.filesystem.model.FileSystem;
 
 public class PwdCommand implements Command {
 
